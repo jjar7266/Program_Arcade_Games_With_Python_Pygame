@@ -1,9 +1,10 @@
 """
 Program Arcade Games With Python and Pygame
 Fourth Edition
+Copyright 2016
 Author: Dr. Paul Vincent Craven
 
-coded along by: Jose 'Joe' Ruiz
+coded (2026) along by: Jose 'Joe' Ruiz
 
 Chapter 2: Create a custom calculator
 
@@ -11,9 +12,7 @@ calculate_miles_per_gallon.py
 """
 
 # Sample Python/Pygame Programs
-# Simpson College Computer Science
 # http://programarcadegames.com/
-# http://simpson.edu/computer-science/
 
 # Explanation video: https://www.youtube.com/watch?v=JK5ht5_m6Mk
 

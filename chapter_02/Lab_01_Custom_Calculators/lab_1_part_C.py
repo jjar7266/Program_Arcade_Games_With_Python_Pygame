@@ -2,8 +2,9 @@
 Program Arcade Games With Python and Pygame
 Fourth Edition
 Author: Dr. Paul Vincent Craven
+Copyright 2016
 
-coded along by: Jose 'Joe' Ruiz
+coded (2026) along by: Jose 'Joe' Ruiz
 
 Lab 1: Custom Calculators
 
