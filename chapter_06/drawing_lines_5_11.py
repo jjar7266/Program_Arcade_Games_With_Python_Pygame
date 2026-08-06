@@ -8,6 +8,8 @@ coded (2026) along by: Jose 'Joe' Ruiz
 
 Chapter 6: Introduction to Graphics
 
+5.11 - Drawing Lines
+
 drawing_lines_5_11.py
 
 Use the base template from the prior example and add the code to draw lines.
