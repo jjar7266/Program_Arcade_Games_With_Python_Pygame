@@ -8,17 +8,14 @@ coded (2026) along by: Jose 'Joe' Ruiz
 
 Chapter 6: Introduction to Graphics
 
-5.11 - Drawing Lines
+6.13 - Drawing a Rectangle
 
-drawing_lines_5_11.py
-
-Use the base template from the prior example and add the code to draw lines.
-Read the comments to figure out exactly where to put the code.
-Try drawing lines with different thicknesses, colors, and locations.
-Draw several lines.
+drawing_rectangle_6_13.py
 """
 # Sample Python/Pygame Programs
 # http://programarcadegames.com/
+
+# Explanation video: https://www.youtube.com/watch?v=53ucZ6_7_t4&t=6s
 
 # Import modules
 import pygame
@@ -28,7 +25,6 @@ BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
 GREEN = (  0, 255,   0)
 RED   = (255,   0,   0)
-BLUE  = (  0,   0, 255)  # Added a new color
 
 # Initialize Pygame
 pygame.init()
@@ -65,18 +61,11 @@ while not done:
 
     # --- Drawing code should go here
 
-    # Draw on the screen line from (0, 0) to (100, 100)
-    # that is 5 pixels wide.
-    pygame.draw.line(screen, GREEN, [0, 0], [100, 100], 5)
+    for x in range(0, 100, 20):
+        pygame.draw.line(screen, GREEN, [x, 0], [x, 100], 5)
 
-    # Draw a blue line
-    pygame.draw.line(screen, BLUE, [100, 100], [300, 50], 10)
-
-    # Draw a red line
-    pygame.draw.line(screen, RED, [300, 50], [200, 300], 12)
-
-    # Draw a black line
-    pygame.draw.line(screen, BLACK, [300, 300], [100, 350], 25)
+    # Draw a rectangle
+    pygame.draw.rect(screen, BLACK, [150, 50, 250, 100], 5)
 
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()

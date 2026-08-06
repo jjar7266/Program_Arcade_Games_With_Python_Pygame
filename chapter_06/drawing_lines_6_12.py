@@ -8,9 +8,9 @@ coded (2026) along by: Jose 'Joe' Ruiz
 
 Chapter 6: Introduction to Graphics
 
-5.12 - Drawing Lines With Loops and Offsets
+6.12 - Drawing Lines With Loops and Offsets
 
-drawing_lines_5_12.py
+drawing_lines_6_12.py
 """
 # Sample Python/Pygame Programs
 # http://programarcadegames.com/
@@ -96,7 +96,7 @@ while not done:
 
     # ----------------------------------------------------------------
     # Drawing a series of x's
-    
+
     for x_offset in range(400, 650, 30):
         pygame.draw.line(screen, BLACK, [x_offset, 100], [x_offset - 10, 90], 2)
         pygame.draw.line(screen, BLACK, [x_offset, 90], [x_offset - 10, 100], 2)
