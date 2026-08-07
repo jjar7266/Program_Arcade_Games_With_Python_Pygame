@@ -274,10 +274,12 @@ def exercise10():
         for col in range(1, 10):
             value = row * col
             if value < 10:
-                print(value, end="   ")  # extra space for single digits
-            else:
-                print(value, end= "  ")
-        print()
+                print(" ", end="")  # Leading space for single digits
+
+            # Print the number itself, followed by ONE space
+            print(value, end= " ")
+
+        print()  # Move to the next row
 
 # ------------------------------------------------------
 # 11. Write code that will print the following:
