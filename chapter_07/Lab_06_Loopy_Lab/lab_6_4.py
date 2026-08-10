@@ -6,7 +6,7 @@ Author: Dr. Paul Vincent Craven
 
 coded (2026) along by: Jose 'Joe' Ruiz
 
-Lab 7: Loopy Lab: 6.4 Part 4
+Lab 6: Loopy Lab: 6.4 Part 4
 
 lab_6_4.py
 """
