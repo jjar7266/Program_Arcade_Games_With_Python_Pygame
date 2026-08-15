@@ -6,16 +6,23 @@ Author: Dr. Paul Vincent Craven
 
 coded (2026) along by: Jose 'Joe' Ruiz
 
-Chapter 10: Functions - Main Functions and Globals
+Chapter 12: Bitmapped Graphics and Sound
 
-pygame_base_template_proper.py
+test_load_image.py
 
-Pygame base template for opening a window, done with functions
+using the Pygame base template for opening a window, done with functions
 """
 # Sample Python/Pygame Programs
 # http://programarcadegames.com/
 
+# Explanation video: https://www.youtube.com/watch?v=4YqIKncMJNs&t=1s
+
 import pygame
+from pathlib import Path  # Not used by the Author/Instructor
+
+# Base directory for assets (using pathlib to load)
+BASE_DIR = Path(__file__).resolve().parent
+IMAGE_DIR = BASE_DIR / "images"
 
 # ------------------------------------------------------------------
 # TEACHER MODE:
@@ -34,6 +41,7 @@ BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
 GREEN = (  0, 255,   0)
 RED   = (255,   0,   0)
+
 
 def main():
     """ Main function for the game. """
@@ -56,6 +64,16 @@ def main():
     screen = pygame.display.set_mode(size)
 
     pygame.display.set_caption("My Game")
+
+    # Load all images here
+    background_image = pygame.image.load(IMAGE_DIR / "saturn_family1.jpg").convert_alpha()
+    player_image = pygame.image.load(IMAGE_DIR / "spaceship.png").convert_alpha()
+
+    # Scale down background image to fit the window
+    background_image = pygame.transform.smoothscale(background_image, size)
+
+    # Hide the mouse cursor
+    pygame.mouse.set_visible(False)
 
     # Loop until the user clicks the close button.
     done = False
@@ -81,6 +99,16 @@ def main():
         # First, clear the screen to white. Don't put other drawing commands
         # above this, or they will be erased with this command.
         screen.fill(WHITE)
+
+        # Draw background image
+        screen.blit(background_image, [0, 0])
+
+        # Draw player at mouse position
+        player_position = pygame.mouse.get_pos()
+        x = player_position[0]
+        y = player_position[1]
+        screen.blit(player_image, [x, y])
+
 
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
