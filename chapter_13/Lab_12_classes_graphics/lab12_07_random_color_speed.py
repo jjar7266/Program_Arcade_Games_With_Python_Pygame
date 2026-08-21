@@ -7,29 +7,34 @@ Author: Dr. Paul Vincent Craven
 coded (2026) along by: Jose 'Joe' Ruiz
 
 Chapter 13: Introduction to Classes
-Lab 12.4 — Bouncing Rectangles
+Lab 12.7 — Random Colors and Random Speeds
 """
 
 # Import modules
 import pygame
 import random
 
-# --------------------------------------------------------------------
+# -----------------------------------------------------------------
 # CONSTANTS
-# --------------------------------------------------------------------
+# -----------------------------------------------------------------
 WHITE = (255, 255, 255)
 BLACK = (  0,   0,   0)
 GREEN = (  0, 255,   0)
 RED   = (255,   0,   0)
-
 
 # ------------------------------------------------------------
 # 🟥 Rectangle Class
 # ------------------------------------------------------------
 class Rectangle:
     def __init__(self, x: int, y: int, width: int, height: int,
-                 change_x: int, change_y: int):
-        """ Store position, size, and movement speed. """
+                 change_x: float, change_y: float):
+        """
+        Store position, size, movement speed, and color.
+
+        This class now combines:
+        - Random colors
+        - Random speeds
+        """
 
         self.x      = x
         self.y      = y
@@ -39,27 +44,23 @@ class Rectangle:
         self.change_x = change_x
         self.change_y = change_y
 
+        # Random color
+        self.color = (
+            random.randint(0, 255),
+            random.randint(0, 255),
+            random.randint(0, 255)
+        )
+
     def move(self):
-        """
-        Move the rectangle each frame.
+        """ Move the rectangle and bounce off edges. """
 
-        NEW FOR LAB 12.4:
-        After moving, check if the rectangle hits the screen edges.
-        If it does, reverse direction (bounce)
-        """
-
-        # Move first
         self.x += self.change_x
         self.y += self.change_y
-
-        # ------------------------------------------------------------
-        # Bounce Logic
-        # ------------------------------------------------------------
 
         # Bounce left or right
         if self.x < 0:
             self.x = 0
-            self.change_x *= -1  # Reverse direction
+            self.change_x *= -1
             if self.change_x == 0:
                 self.change_x = 1
 
@@ -83,38 +84,43 @@ class Rectangle:
                 self.change_y = 1
 
     def draw(self, screen):
-        """ Draw the rectangle on the screen. """
-        pygame.draw.rect(screen, GREEN,
+        """ Draw the rectangle using its random color. """
+        pygame.draw.rect(screen, self.color,
                          (self.x, self.y, self.width, self.height))
 
 
-# --------------------------------------------------------------------
+# ----------------------------------------------------------------------
 # MAIN PROGRAM
-# --------------------------------------------------------------------
+# ----------------------------------------------------------------------
 def main():
     pygame.init()
 
     size = (700, 500)
     screen = pygame.display.set_mode(size)
-    pygame.display.set_caption("Lab 12.4 - Bouncing Rectangles")
+    pygame.display.set_caption("Lab 12.7 - Random Colors and Speeds")
 
     rectangle_list = []
 
+    # ---------------------------------------------------------------
+    # Combine random colors + random speeds
+    # ---------------------------------------------------------------
     for i in range(10):
         x = random.randint(0, 600)
         y = random.randint(0, 400)
         width = random.randint(20, 100)
         height = random.randint(20, 100)
 
-        change_x = random.randint(-3, 3)
-        change_y = random.randint(-3, 3)
+        # Random speed magnitude between -3.0 and 3.0
+        speed_x = random.uniform(-3.0, 3.0)
+        speed_y = random.uniform(-3.0, 3.0)
 
-        if change_x == 0:
-            change_x = 1
-        if change_y == 0:
-            change_y = 1
+        # Avoid zero movement
+        if abs(speed_x) < 0.2:
+            speed_x = 0.5
+        if abs(speed_y) < 0.2:
+            speed_y = 0.5
 
-        rectangle = Rectangle(x, y, width, height, change_x, change_y)
+        rectangle = Rectangle(x, y, width, height, speed_x, speed_y)
         rectangle_list.append(rectangle)
 
     done = False
@@ -125,7 +131,7 @@ def main():
             if event.type == pygame.QUIT:
                 done = True
 
-        # Move all rectangles (now with bounce logic)
+        # Move all rectangles
         for rect in rectangle_list:
             rect.move()
 
@@ -143,4 +149,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    
 

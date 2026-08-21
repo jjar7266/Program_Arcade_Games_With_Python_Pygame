@@ -6,7 +6,7 @@ Author: Dr. Paul Vincent Craven
 
 coded (2026) along by: Jose 'Joe' Ruiz
 
-Chapter 13: Classes
+Chapter 13: Introduction to Classes
 Lab 12.6 — Random Speeds
 """
 
@@ -149,4 +149,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
+

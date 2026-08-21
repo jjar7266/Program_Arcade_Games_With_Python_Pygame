@@ -6,7 +6,7 @@ Author: Dr. Paul Vincent Craven
 
 coded (2026) along by: Jose 'Joe' Ruiz
 
-Chapter 13: Classes
+Chapter 13: Introduction to Classes
 Lab 12.5 — Random Colors
 """
 
