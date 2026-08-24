@@ -8,8 +8,6 @@ coded (2026) along by: Jose 'Joe' Ruiz
 
 Chapter 14: Introduction to Sprites
 
-This example shows how to create sprites to represent bullets
-
 move_with_walls_example.py
 """
 # Sample Python/Pygame Programs
