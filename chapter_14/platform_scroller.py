@@ -8,12 +8,12 @@ coded (2026) along by: Jose 'Joe' Ruiz
 
 Chapter 14: Introduction to Sprites
 
-platform_jumper.py
+platform_scroller.py
 """
 # Sample Python/Pygame Programs
 # http://programarcadegames.com/
 
-# Explanation video: http://programarcadegames.com/python_examples/f.php?file=platform_jumper.py
+# Explanation video: http://programarcadegames.com/python_examples/f.php?file=platform_scroller.py
 
 # Part of a series:
 #    - move_with_walls_example.py
@@ -159,7 +159,7 @@ class Platform(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
 
-class Level(object):
+class Level():
     """
     This is a generic super-class used to define a level.
     Create a child class for each level with level-specific info.
@@ -174,8 +174,9 @@ class Level(object):
         self.enemy_list = pygame.sprite.Group()
         self.player = player
 
-        # Background image
-        self.background = None
+        # NEW ADD
+        # How far this world has been scrolled left/right
+        self.world_shift = 0
 
     # Update everything on this level
     def update(self):
@@ -193,6 +194,22 @@ class Level(object):
         self.platform_list.draw(screen)
         self.enemy_list.draw(screen)
 
+    # NEW ADD
+    def shift_world(self, shift_x):
+        """
+        When the user moves left/right and we need to scroll everything.
+        """
+
+        # keep track of the shift amount
+        self.world_shift += shift_x
+
+        # Go through all the sprite lists and shift
+        for platform in self.platform_list:
+            platform.rect.x += shift_x
+
+        for enemy in self.enemy_list:
+            enemy.rect.x += shift_x
+
 
 # Create platforms for the level
 class Level_01(Level):
@@ -209,7 +226,37 @@ class Level_01(Level):
         # Array with width, height, x, and y of platform
         level= [[210, 70, 500, 500],
                 [210, 70, 200, 400],
-                [210, 70, 600, 300]
+                [210, 70, 600, 300],
+                [210, 70, 1120, 280],
+            ]
+
+        # Go through the array above and add platforms
+        for platform in level:
+            block = Platform(platform[0], platform[1])
+            block.rect.x = platform[2]
+            block.rect.y = platform[3]
+            block.player = self.player
+            self.platform_list.add(block)
+
+
+# NEW ADD
+# Create platforms for the level
+class Level_02(Level):
+    """ Definition for level 2. """
+
+    def __init__(self, player):
+        """ Create level 2. """
+
+        # Call the parent constructor
+        Level.__init__(self, player)
+
+        self.level_limit = -1000
+
+        # Array with type of platform, and x, y locations of the platform.
+        level = [[210, 30, 450, 570],
+                 [210, 30, 850, 420],
+                 [210, 30, 1000, 520],
+                 [210, 30, 1120, 280],
             ]
 
         # Go through the array above and add platforms
@@ -229,14 +276,17 @@ def main():
     size = [SCREEN_WIDTH, SCREEN_HEIGHT]
     screen = pygame.display.set_mode(size)
 
-    pygame.display.set_caption("Chapter 14 - platform_jumper.py")
+    pygame.display.set_caption("Chapter 14 - platform_scroller.py")
 
     # Create the player
     player = Player()
 
     # Create all the levels
     level_list = []
-    level_list.append( Level_01(player) )
+    level_list.append(Level_01(player))
+
+    # NEW ADD
+    level_list.append(Level_02(player))
 
     # Set the current level
     current_level_no = 0
@@ -284,13 +334,28 @@ def main():
         # Update items in the level
         current_level.update()
 
+        # NEW ADD MODIFICATION
         # If the player gets near the right side, shift the world left (-x)
-        if player.rect.right > SCREEN_WIDTH:
-            player.rect.right = SCREEN_WIDTH
+        if player.rect.right >= 500:
+            diff = player.rect.right - 500
+            player.rect.right = 500
+            current_level.shift_world(-diff)
 
         # If the player gets near the left side, shift the world right (+x)
-        if player.rect.left < 0:
-            player.rect.left = 0
+        if player.rect.left <= 120:
+            diff = 120 - player.rect.left
+            player.rect.left = 120
+            current_level.shift_world(diff)
+
+        # If the player gets to the end of the level, go to the next level
+        current_position = player.rect.x + current_level.world_shift
+        if current_position < current_level.level_limit:
+            player.rect.x = 120
+            if current_level_no < len(level_list)-1:
+                current_level_no += 1
+                current_level = level_list[current_level_no]
+                player.level = current_level
+
 
         # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
         current_level.draw(screen)
