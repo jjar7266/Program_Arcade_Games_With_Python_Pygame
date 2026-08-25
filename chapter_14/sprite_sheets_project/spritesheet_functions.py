@@ -36,14 +36,19 @@ you are intersted in.
 import pygame
 import constants
 
+from pathlib import Path
+
 class SpriteSheet(object):
     """ Class used to grab images out of a sprite sheet. """
 
     def __init__(self, file_name):
         """ Constructor. Pass in the file name of the sprite sheet. """
 
+        # Build a reliable path to the assets folder
+        sprite_path = Path(__file__).resolve().parent / "assets" / file_name
+
         # Load the sprite sheet.
-        self.sprite_sheet = pygame.image.load(file_name).convert_alpha()
+        self.sprite_sheet = pygame.image.load(sprite_path).convert_alpha()
 
     def get_image(self, x, y, width, height):
         """
