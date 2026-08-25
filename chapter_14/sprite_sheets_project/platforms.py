@@ -49,18 +49,18 @@ class Platform(pygame.sprite.Sprite):
     def __init__(self, sprite_sheet_data):
         """
         Platform constructor. Assumes constructed with user passing in
-        an array of 5 mumbers like what's defined at the top of this code.
+        an array of 5 numbers like what's defined at the top of this code.
         """
         super().__init__()
 
-        sprite_path = Path(__file__).resolve().parent / "assets" "tiles_spritesheet.png"
+        sprite_path = Path(__file__).resolve().parent / "assets" / "tiles_spritesheet.png"
         sprite_sheet = SpriteSheet(sprite_path)
-        
+
         # Grab the image for this platform
         self.image = sprite_sheet.get_image(sprite_sheet_data[0],
                                             sprite_sheet_data[1],
                                             sprite_sheet_data[2],
-                                            sprite_sheet_data[3],
+                                            sprite_sheet_data[3]
                                         )
 
         self.rect = self.image.get_rect()
