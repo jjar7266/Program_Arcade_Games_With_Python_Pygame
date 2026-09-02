@@ -1,0 +1,87 @@
+Chapter 14 - Lab 13: Sprite Collecting
+
+1. Make sure this program is created in its own directory. If you are starting from the
+   template I have at BitBucket, then make sure you start in the “Lab 13 - Sprite
+   Collecting” folder and put everything in there.
+
+2. Start with the following program:
+   ProgramArcadeGames.com/python_examples/f.php?file=sprite_collect_blocks.py
+
+3. Update the comments at the beginning to reflect that it is now your program, not mine.
+
+4. Modify it so the player moves with the keyboard rather than the mouse. Take a look at
+   the move_sprite_keyboard_smooth.py program also available on the example page:
+
+   ProgramArcadeGames.com/python_examples/f.php?file=move_sprite_keyboard_smooth.py
+
+- Out of this file, you will need to grab the Player class and move it to your own program.
+  Do not get rid of the Block class. You will have both the Block and Player class in your
+  program.
+
+- Right now, your player is an instance of Block. You will need to change it so
+  that you create an instance of Player. Note that the constructor for Player takes
+  different parameters than Block.
+
+- Update your event loop so that it responds to keyboard input like this new example does.
+- Remove the code that moves the player with the mouse.
+- Make the player blue.
+- Make sure there is exactly one call to all_sprites_list.update() in your main program
+  loop. This will call the update() method in every sprite.
+
+- Test and make sure it works now.
+
+5. Create both good sprites and bad sprites
+- Good Sprites
+  - Where you create 50 blocks now, instead of adding them to a list called block_list, add
+    them to a list called good_block_list.
+
+  - Make the blocks green.
+  - Where you check for block collisions in the main loop, update the check so it uses
+    good_block_list.
+
+- Bad Sprites
+  - Duplicate this code and add 50 more blocks to a new list called bad_block_list.
+  - Make sure your program only creates one all_sprites_list.
+    Don't recreate the list right before you add bad blocks or the player.
+
+  - Make the blocks red.
+  - Duplicate that code and check against bad_block_list. Decrease the score instead of
+    increasing it.
+  - Test and make sure it is working.
+
+6. Use graphics to signify good/bad sprites as shown in the sprite_collect_graphic.py
+   example file. (Failure to use graphics is only a two point penalty.)
+
+7. Rather than simply use print to display the score on the console, display the score on
+   the graphics window. Go back to the end of Chapter 5 and look up the section on drawing
+   text.
+
+8. Add sound effects for when the user hits good blocks, or bad blocks.
+   Here are a couple from OpenGameArt.org:
+   ProgramArcadeGames.com/labs/sprite_collecting/good_block.wav
+   ProgramArcadeGames.com/labs/sprite_collecting/bad_block.wav
+   To save a sound file right click on it. Then, depending on your browser,
+   select "Save target as" or "Save link as."
+   Looking back at how we made a sound to begin with, we triggered the sound with a mouse click event.
+   We won't be doing that here. Find the code that you already have that detects when a collision occurs.
+   Play the sound when you have a collision. Also, remember that when you load a sound, it needs to be
+   done before the main loop, but after the pygame.init() command.
+
+9. Add a check and make sure the player doesn't slide off the end of the screen.
+   This check should go in the update method of the Player class. There should be
+   four if statement checks, one for each border. If the player's x and y get outside
+   the bounds of the screen, reset the player back inside the screen. Do not modify change_x or change_y.
+   That doesn't work for player-controlled objects. Don't forget to check the right and bottom borders,
+   they are easy to get wrong.
+
+10. Download a wav or ogg file and have it play a sound if the user tries to slide off the screen.
+    Here's one sound you can use:
+    ProgramArcadeGames.com/labs/sprite_collecting/bump.wav
+
+11. Check to make sure the bump sound doesn't continually play when the user is at the edge of the screen.
+    If it does, the program is checking the edge incorrectly.
+
+12. When sending your program to the instructor, make sure to include the sound effects and graphics.
+    If you are submitting your code with version control, make sure all files get uploaded. If you are e-mailing
+    or uploading make sure all the files are zipped. (Do not zip files if you are using version control programs
+    like SourceTree, just make sure they get added to version control.)

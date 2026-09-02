@@ -1,0 +1,155 @@
+# Lab 13 – Sprite Collecting
+# Master Project Notes (2026 Modern Python/Pygame Edition)
+
+# ------------------------------------------------------------
+# 1. Project Structure
+# ------------------------------------------------------------
+# Create a clean project folder:
+# lab_13_sprite_collecting/
+# ├── assets/
+# │   ├── good_block.png
+# │   ├── bad_block.png
+# │   ├── good_block.wav
+# │   ├── bad_block.wav
+# │   └── bump.wav
+# └── src/
+#     └── lab13_main.py
+#
+# Use pathlib for all asset paths:
+# BASE_DIR = Path(__file__).resolve().parent.parent
+# ASSETS_DIR = BASE_DIR / "assets"
+
+# ------------------------------------------------------------
+# 2. Base Program Setup
+# ------------------------------------------------------------
+# Start from sprite_collect_blocks.py.
+# Update header comments to your name, year (2026), and lab number.
+# Modernize:
+# - Use pathlib
+# - Use pygame-ce or pygame (your choice)
+# - Use constants for screen size and colors
+# - Use main() structure
+
+# ------------------------------------------------------------
+# 3. Replace Mouse Movement with Keyboard Movement
+# ------------------------------------------------------------
+# Import or recreate a modern Player class based on move_sprite_keyboard_smooth.py.
+# Keep the Block class from the original program.
+# Replace:
+#     player = Block(...)
+# with:
+#     player = Player(...)
+#
+# Event loop:
+# - KEYDOWN: LEFT → go_left(), RIGHT → go_right()
+# - KEYUP: stop() when key released
+#
+# Make the player blue.
+#
+# Ensure exactly ONE call to:
+#     all_sprites_list.update()
+# inside the main loop.
+
+# ------------------------------------------------------------
+# 4. Good and Bad Sprites
+# ------------------------------------------------------------
+# Good sprites:
+# - Create good_block_list
+# - Generate 50 blocks
+# - Make them green
+# - Add to good_block_list AND all_sprites_list
+# - Collision → remove block, increase score
+#
+# Bad sprites:
+# - Create bad_block_list
+# - Generate 50 blocks
+# - Make them red
+# - Add to bad_block_list AND all_sprites_list
+# - Collision → remove block, decrease score
+#
+# IMPORTANT:
+# - Only ONE all_sprites_list for everything.
+
+# ------------------------------------------------------------
+# 5. Graphics for Good/Bad Blocks
+# ------------------------------------------------------------
+# Replace colored rectangles with images:
+# - good_block.png
+# - bad_block.png
+#
+# In Block class:
+# - Load image with convert_alpha()
+# - Set self.image and self.rect accordingly
+
+# ------------------------------------------------------------
+# 6. On-Screen Score Display
+# ------------------------------------------------------------
+# Use pygame.font to draw score:
+# font = pygame.font.SysFont("Calibri", 24, True, False)
+# score_text = font.render(f"Score: {score}", True, WHITE)
+# screen.blit(score_text, (10, 10))
+
+# ------------------------------------------------------------
+# 7. Sound Effects for Good/Bad Collisions
+# ------------------------------------------------------------
+# After pygame.init():
+# pygame.mixer.init()
+# good_sound = pygame.mixer.Sound(ASSETS_DIR / "good_block.wav")
+# bad_sound = pygame.mixer.Sound(ASSETS_DIR / "bad_block.wav")
+#
+# On collision:
+# good_sound.play()
+# bad_sound.play()
+
+# ------------------------------------------------------------
+# 8. Screen Boundary Checks (Player.update)
+# ------------------------------------------------------------
+# Clamp player inside screen:
+# if self.rect.left < 0: self.rect.left = 0
+# if self.rect.right > SCREEN_WIDTH: self.rect.right = SCREEN_WIDTH
+# if self.rect.top < 0: self.rect.top = 0
+# if self.rect.bottom > SCREEN_HEIGHT: self.rect.bottom = SCREEN_HEIGHT
+#
+# Do NOT modify change_x or change_y.
+
+# ------------------------------------------------------------
+# 9. Bump Sound When Hitting Screen Edge
+# ------------------------------------------------------------
+# Load bump.wav:
+# bump_sound = pygame.mixer.Sound(ASSETS_DIR / "bump.wav")
+#
+# In Player:
+# self.hit_boundary = False
+#
+# In update():
+# boundary_hit = False
+# (check all four edges)
+#
+# If boundary_hit and not self.hit_boundary:
+#     bump_sound.play()
+#     self.hit_boundary = True
+# elif not boundary_hit:
+#     self.hit_boundary = False
+
+# ------------------------------------------------------------
+# 10. Final Testing Checklist
+# ------------------------------------------------------------
+# - Player moves smoothly with keyboard
+# - Player stays inside screen
+# - Good blocks disappear, increase score, play sound
+# - Bad blocks disappear, decrease score, play sound
+# - Bump sound plays once when hitting edge
+# - Score displays correctly
+# - No crashes or missing asset errors
+
+# ------------------------------------------------------------
+# 11. Version Control / Submission
+# ------------------------------------------------------------
+# Commit messages:
+# - Add Lab 13 base implementation
+# - Implement Player keyboard movement
+# - Add good/bad blocks with graphics and sound
+#
+# If submitting:
+# - Zip entire lab_13_sprite_collecting folder
+# - Include all assets and code
