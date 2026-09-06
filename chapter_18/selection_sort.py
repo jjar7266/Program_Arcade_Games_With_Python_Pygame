@@ -75,19 +75,23 @@ def print_list(my_list):
     print()
 
 
-# Create a list of random numbers to demonstrate the sort.
-my_list = []
+# Only run this test code when the file is executed directly,
+# NOT when imported by another module.
+if __name__ == "__main__":
 
-# Generate 10 random integers between 0 and 99.
-for i in range(10):
-    my_list.append(random.randrange(100))
+    # Create a list of random numbers to demonstrate the sort.
+    my_list = []
 
-# Show the list before sorting
-print("Before sorting:")
-print_list(my_list)
+    # Generate 10 random integers between 0 and 99.
+    for i in range(10):
+        my_list.append(random.randrange(100))
 
-# Sort the list using selection sort.
-selection_sort(my_list)
+    # Show the list before sorting
+    print("Before sorting:")
+    print_list(my_list)
 
-# Show the list after sorting.
-print_list(my_list)
+    # Sort the list using selection sort.
+    selection_sort(my_list)
+
+    # Show the list after sorting.
+    print_list(my_list)
