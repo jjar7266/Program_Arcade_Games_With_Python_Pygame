@@ -45,6 +45,39 @@ Because the book’s original code reflects older conventions, every lab and cha
 
 ---
 
+---
+
+## ⚠️ Educational Disclaimer
+
+This repository is an independent educational project created while studying:
+
+**Program Arcade Games With Python and Pygame**
+by **Dr. Paul Vincent Craven**
+
+All source code contained in this repository was written, rewritten, refactored,
+or modernized by **Jose "Joe" Ruiz** as part of a personal learning process.
+
+Many examples are based on concepts, labs, and programming exercises presented
+in the book, but have been updated to reflect current Python practices,
+improved code organization, enhanced readability, and modern Pygame
+development techniques.
+
+This repository does not reproduce or replace the book itself. The book, its
+text, diagrams, example code, exercises, and other original materials remain
+the intellectual property of their respective copyright holders.
+
+This project is not affiliated with, endorsed by, sponsored by, or published by
+Dr. Paul Vincent Craven, the publisher, Pygame, or the pygame-ce project.
+
+Readers interested in learning Python game development are encouraged to
+support the original author and obtain a legitimate copy of the book.
+
+---
 ## 💡 Notes
 
-This repository is a learning companion to the book, containing my own rewritten and modernized implementations of the exercises. All code is original and adapted for current Python standards.
+This repository serves as a personal learning archive, documenting my progress
+through the book while creating modernized implementations of its examples.
+
+The code reflects my understanding of the material at the time each chapter was
+completed. As my skills improve, examples may be revised, expanded, or
+refactored to reflect newer Python and Pygame best practices.
